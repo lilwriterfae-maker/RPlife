@@ -1,15 +1,68 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>RP Life</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>RP Life</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
-<body class="welcome">
-    <div class="welcome-container">
-        <h1 class="title">RP Life</h1>
-        <p class="subtitle">Twórz światy. Dołączaj do historii.</p>
-        <button onclick="window.location='app.html'" class="enter-btn">Wejdź do świata</button>
+<body>
+<div class="container">
+
+  <!-- Logowanie -->
+  <div class="card" id="loginView">
+    <h2>Logowanie</h2>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Hasło">
+    <button id="loginBtn">Zaloguj</button>
+    <p class="link" onclick="showRegister()">Utwórz konto</p>
+    <p class="link" onclick="showReset()">Zapomniałeś hasła?</p>
+    <p id="loginMsg"></p>
+  </div>
+
+  <!-- Rejestracja -->
+  <div class="card hidden" id="registerView">
+    <h2>Rejestracja</h2>
+    <input id="regEmail" placeholder="Email">
+    <input id="regPassword" type="password" placeholder="Hasło">
+    <button id="sendCodeBtn">Wyślij kod</button>
+    <div id="codeBox" class="hidden">
+      <input id="regCode" placeholder="Kod weryfikacyjny">
+      <button id="verifyCodeBtn">Zarejestruj</button>
     </div>
+    <p class="link" onclick="showLogin()">Masz konto? Zaloguj się</p>
+    <p id="regMsg"></p>
+  </div>
+
+  <!-- Reset hasła -->
+  <div class="card hidden" id="resetView">
+    <h2>Reset hasła</h2>
+    <input id="resetEmail" placeholder="Email">
+    <button id="resetSendBtn">Wyślij kod resetu</button>
+    <div id="resetCodeBox" class="hidden">
+      <input id="resetCode" placeholder="Kod">
+      <input id="resetNewPassword" type="password" placeholder="Nowe hasło">
+      <button id="resetConfirmBtn">Zmień hasło</button>
+    </div>
+    <p class="link" onclick="showLogin()">Wróć</p>
+    <p id="resetMsg"></p>
+  </div>
+
+  <!-- Po zalogowaniu -->
+  <div class="card hidden" id="accountView">
+    <h2>Witaj w RP Life!</h2>
+    <p>Email: <span id="accEmail"></span></p>
+    <button id="logoutBtn">Wyloguj</button>
+  </div>
+
+  <!-- Panel admina -->
+  <div class="card hidden" id="adminView">
+    <h2>Panel Admina</h2>
+    <p>Witaj, Adminie RP Life 🧙‍♀️</p>
+    <button onclick="showLogin()">Wyloguj</button>
+  </div>
+
+</div>
+<script src="app.js"></script>
 </body>
 </html>
