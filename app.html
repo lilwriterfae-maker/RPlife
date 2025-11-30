@@ -4,100 +4,31 @@
     <meta charset="UTF-8">
     <title>RP Life</title>
     <style>
-        /* --- Pastel magiczny klimat --- */
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-        }
-
-        /* --- Ekran powitalny --- */
-        .welcome {
-            background: linear-gradient(135deg, #f6d9ff, #dbe4ff, #ffe7fa);
-            background-size: 300% 300%;
-            animation: gradientShift 12s ease infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        h1 {
-            font-size: 4rem;
-            color: #4d3b6b;
-            margin: 0;
-        }
-
-        p {
-            margin-top: 10px;
-            font-size: 1.4rem;
-            opacity: 0.8;
-            color: #4d3b6b;
-        }
-
-        .enter-btn {
-            margin-top: 30px;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 25px;
-            background: #bca7ff;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .enter-btn:hover {
-            background: #9f8aff;
-        }
-
-        /* --- Strona aplikacji --- */
-        .app-page {
-            display: none;
-            background: #faf8ff;
-            min-height: 100vh;
-        }
-
-        .topbar {
-            background: #d8c9ff;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .rp-list {
-            padding: 20px;
-        }
-
-        #rpContainer {
-            margin-top: 10px;
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-        }
+        body { margin:0; font-family:"Poppins", sans-serif; }
+        .welcome { background: linear-gradient(135deg, #f6d9ff, #dbe4ff, #ffe7fa); 
+                   background-size:300% 300%; animation: gradientShift 12s ease infinite;
+                   display:flex; justify-content:center; align-items:center; height:100vh;
+                   flex-direction:column; text-align:center; }
+        @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+        h1 { font-size:4rem; color:#4d3b6b; margin:0; }
+        p { margin-top:10px; font-size:1.4rem; opacity:0.8; color:#4d3b6b; }
+        .enter-btn { margin-top:30px; padding:15px 40px; font-size:1.2rem; border:none; border-radius:25px; background:#bca7ff; color:white; cursor:pointer; transition:.3s; }
+        .enter-btn:hover { background:#9f8aff; }
+        .app-page { display:none; background:#faf8ff; min-height:100vh; }
+        .topbar { background:#d8c9ff; padding:15px; display:flex; justify-content:space-between; }
+        .hidden { display:none; }
+        .rp-list { padding:20px; }
+        #rpContainer { margin-top:10px; background:white; padding:10px; border-radius:10px; }
     </style>
 </head>
 <body>
 
-<!-- Ekran powitalny -->
 <div class="welcome" id="welcomeScreen">
     <h1>RP Life</h1>
     <p>Twórz światy. Dołączaj do historii.</p>
     <button class="enter-btn" id="enterBtn">Wejdź do świata</button>
 </div>
 
-<!-- Strona aplikacji -->
 <div class="app-page" id="appPage">
     <header class="topbar">
         <h2>RP Life</h2>
@@ -144,7 +75,7 @@
         appPage.style.display = "block";
     });
 
-    // --- Google Login ---
+    // --- Google Login (działa od razu na localhost i Netlify) ---
     document.getElementById("googleBtn").addEventListener("click", () => {
       auth.signInWithPopup(provider)
         .then(result => {
