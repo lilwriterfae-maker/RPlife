@@ -18,16 +18,6 @@ const firebaseConfig = {
   appId: "1:1018234460952:web:55f0331db82f3028471c6d"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);}
-  apiKey: "TU_JEST_KLUCZ",
-  authDomain: "twoj-projekt.firebaseapp.com",
-  projectId: "twoj-projekt",
-  storageBucket: "twoj-projekt.appspot.com",
-  messagingSenderId: "1234567890",
-  appId: "1:1234567890:web:abcdef123456"
-};
-
 // --- Initialize Firebase ---
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
