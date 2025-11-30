@@ -1,0 +1,85 @@
+/* 🌙 Pastel magiczny klimat */
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+/* --- EKRAN POWITALNY --- */
+
+body.welcome {
+    background: linear-gradient(135deg, #f6d9ff, #dbe4ff, #ffe7fa);
+    background-size: 300% 300%;
+    animation: gradientShift 12s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.welcome-container {
+    text-align: center;
+    color: #4d3b6b;
+}
+
+.title {
+    font-size: 4rem;
+    margin: 0;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    opacity: 0.8;
+}
+
+.enter-btn {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    background: #bca7ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.enter-btn:hover {
+    background: #9f8aff;
+}
+
+/* --- STRONA APLIKACJI --- */
+
+.app-page {
+    background: #faf8ff;
+    padding: 0;
+}
+
+.topbar {
+    background: #d8c9ff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none;
+}
+
+.rp-list {
+    padding: 20px;
+}
+
+#rpContainer {
+    margin-top: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
