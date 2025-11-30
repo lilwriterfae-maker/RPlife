@@ -3,7 +3,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebas
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
 // --- TU WKLEJ SWÓJ FIREBASE CONFIG ---
-const firebaseConfig = {// Import the functions you need from the SDKs you need
+const firebaseConfig = {
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -16,6 +17,10 @@ const firebaseConfig = {
   storageBucket: "rplife1-4e8e4.firebasestorage.app",
   messagingSenderId: "1018234460952",
   appId: "1:1018234460952:web:55f0331db82f3028471c6d"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 };
 
 // --- Initialize Firebase ---
@@ -47,4 +52,3 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
         document.getElementById("logoutBtn").classList.add("hidden");
     });
 });
-
