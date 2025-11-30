@@ -1,106 +1,69 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>RP Life</title>
-    <style>
-        body { margin:0; font-family:"Poppins", sans-serif; }
-        .welcome { background: linear-gradient(135deg, #f6d9ff, #dbe4ff, #ffe7fa); 
-                   background-size:300% 300%; animation: gradientShift 12s ease infinite;
-                   display:flex; justify-content:center; align-items:center; height:100vh;
-                   flex-direction:column; text-align:center; }
-        @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-        h1 { font-size:4rem; color:#4d3b6b; margin:0; }
-        p { margin-top:10px; font-size:1.4rem; opacity:0.8; color:#4d3b6b; }
-        .enter-btn { margin-top:30px; padding:15px 40px; font-size:1.2rem; border:none; border-radius:25px; background:#bca7ff; color:white; cursor:pointer; transition:.3s; }
-        .enter-btn:hover { background:#9f8aff; }
-        .app-page { display:none; background:#faf8ff; min-height:100vh; }
-        .topbar { background:#d8c9ff; padding:15px; display:flex; justify-content:space-between; }
-        .hidden { display:none; }
-        .rp-list { padding:20px; }
-        #rpContainer { margin-top:10px; background:white; padding:10px; border-radius:10px; }
-    </style>
+  <meta charset="UTF-8">
+  <title>RP Life — Logowanie</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="welcome" id="welcomeScreen">
-    <h1>RP Life</h1>
-    <p>Twórz światy. Dołączaj do historii.</p>
-    <button class="enter-btn" id="enterBtn">Wejdź do świata</button>
+<div class="container">
+
+  <!-- Logowanie -->
+  <div class="card" id="loginView">
+    <h2>Logowanie</h2>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Hasło">
+    <button id="loginBtn">Zaloguj</button>
+
+    <p class="link" onclick="showRegister()">Utwórz konto</p>
+    <p class="link" onclick="showReset()">Zapomniałeś hasła?</p>
+
+    <p id="loginMsg"></p>
+  </div>
+
+  <!-- Rejestracja -->
+  <div class="card hidden" id="registerView">
+    <h2>Rejestracja</h2>
+    <input id="regEmail" placeholder="Email">
+    <input id="regPassword" type="password" placeholder="Hasło">
+    <button id="sendCodeBtn">Wyślij kod</button>
+
+    <div id="codeBox" class="hidden">
+      <input id="regCode" placeholder="Kod weryfikacyjny">
+      <button id="verifyCodeBtn">Zarejestruj</button>
+    </div>
+
+    <p class="link" onclick="showLogin()">Masz konto? Zaloguj się</p>
+    <p id="regMsg"></p>
+  </div>
+
+  <!-- Reset hasła -->
+  <div class="card hidden" id="resetView">
+    <h2>Reset hasła</h2>
+    <input id="resetEmail" placeholder="Email">
+    <button id="resetSendBtn">Wyślij kod resetu</button>
+
+    <div id="resetCodeBox" class="hidden">
+      <input id="resetCode" placeholder="Kod">
+      <input id="resetNewPassword" type="password" placeholder="Nowe hasło">
+      <button id="resetConfirmBtn">Zmień hasło</button>
+    </div>
+
+    <p class="link" onclick="showLogin()">Wróć</p>
+    <p id="resetMsg"></p>
+  </div>
+
+  <!-- Po zalogowaniu -->
+  <div class="card hidden" id="accountView">
+    <h2>Witaj w RP Life!</h2>
+    <p>Email: <span id="accEmail"></span></p>
+    <button id="logoutBtn">Wyloguj</button>
+  </div>
+
 </div>
 
-<div class="app-page" id="appPage">
-    <header class="topbar">
-        <h2>RP Life</h2>
-        <div id="user-controls">
-            <button id="loginBtn">Zaloguj się</button>
-            <button id="googleBtn">Google</button>
-            <button id="logoutBtn" class="hidden">Wyloguj</button>
-        </div>
-    </header>
-
-    <section class="rp-list">
-        <h3>Dostępne RP</h3>
-        <div id="rpContainer">
-            <p>Brak światów — zaloguj się, aby stworzyć pierwszy ✨</p>
-        </div>
-    </section>
-</div>
-
-<!-- Firebase compat CDN -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
-<script>
-    // --- Twój Firebase config ---
-    const firebaseConfig = {
-      apiKey: "AIzaSyCEo11MkUq72bKR6LsghnzmLjkuFkyc6lg",
-      authDomain: "rplife1-4e8e4.firebaseapp.com",
-      projectId: "rplife1-4e8e4",
-      storageBucket: "rplife1-4e8e4.firebasestorage.app",
-      messagingSenderId: "1018234460952",
-      appId: "1:1018234460952:web:55f0331db82f3028471c6d"
-    };
-
-    // --- Initialize Firebase ---
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    // --- Ekran powitalny ---
-    const welcomeScreen = document.getElementById("welcomeScreen");
-    const appPage = document.getElementById("appPage");
-    document.getElementById("enterBtn").addEventListener("click", () => {
-        welcomeScreen.style.display = "none";
-        appPage.style.display = "block";
-    });
-
-    // --- Google Login (działa od razu na localhost i Netlify) ---
-    document.getElementById("googleBtn").addEventListener("click", () => {
-      auth.signInWithPopup(provider)
-        .then(result => {
-          const user = result.user;
-          alert(`Witaj ${user.displayName} 🌸`);
-          document.getElementById("loginBtn").classList.add("hidden");
-          document.getElementById("googleBtn").classList.add("hidden");
-          document.getElementById("logoutBtn").classList.remove("hidden");
-        })
-        .catch(err => {
-          console.error(err);
-          alert("Coś poszło nie tak przy logowaniu ❌");
-        });
-    });
-
-    // --- Wylogowanie ---
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      auth.signOut().then(() => {
-        alert("Wylogowano 🌙");
-        document.getElementById("loginBtn").classList.remove("hidden");
-        document.getElementById("googleBtn").classList.remove("hidden");
-        document.getElementById("logoutBtn").classList.add("hidden");
-      });
-    });
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
