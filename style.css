@@ -1,85 +1,65 @@
-/* 🌙 Pastel magiczny klimat */
-
 body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
+  margin: 0;
+  font-family: "Trebuchet MS", sans-serif;
+  background: linear-gradient(135deg, #e9d5ff, #d1fae5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-/* --- EKRAN POWITALNY --- */
-
-body.welcome {
-    background: linear-gradient(135deg, #f6d9ff, #dbe4ff, #ffe7fa);
-    background-size: 300% 300%;
-    animation: gradientShift 12s ease infinite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.container {
+  width: 350px;
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.welcome-container {
-    text-align: center;
-    color: #4d3b6b;
-}
-
-.title {
-    font-size: 4rem;
-    margin: 0;
-}
-
-.subtitle {
-    margin-top: 10px;
-    font-size: 1.4rem;
-    opacity: 0.8;
-}
-
-.enter-btn {
-    margin-top: 30px;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 25px;
-    background: #bca7ff;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.enter-btn:hover {
-    background: #9f8aff;
-}
-
-/* --- STRONA APLIKACJI --- */
-
-.app-page {
-    background: #faf8ff;
-    padding: 0;
-}
-
-.topbar {
-    background: #d8c9ff;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  animation: fadeIn 0.4s ease;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
-.rp-list {
-    padding: 20px;
+input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
 }
 
-#rpContainer {
-    margin-top: 10px;
-    background: white;
-    padding: 10px;
-    border-radius: 10px;
+button {
+  width: 100%;
+  padding: 12px;
+  background: #a78bfa;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  color: white;
+}
+
+button:hover {
+  background: #8b5cf6;
+}
+
+.link {
+  margin-top: 10px;
+  color: #6b21a8;
+  cursor: pointer;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
