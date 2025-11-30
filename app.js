@@ -13,6 +13,7 @@ const loginView = document.getElementById("loginView");
 const registerView = document.getElementById("registerView");
 const resetView = document.getElementById("resetView");
 const accountView = document.getElementById("accountView");
+const adminView = document.getElementById("adminView");
 
 function showLogin() { hideAll(); loginView.classList.remove("hidden"); }
 function showRegister() { hideAll(); registerView.classList.remove("hidden"); }
@@ -22,15 +23,20 @@ function showAccount(email) {
     document.getElementById("accEmail").innerText = email;
     accountView.classList.remove("hidden");
 }
+function showAdminPanel() {
+    hideAll();
+    adminView.classList.remove("hidden");
+}
 
 function hideAll() {
     loginView.classList.add("hidden");
     registerView.classList.add("hidden");
     resetView.classList.add("hidden");
     accountView.classList.add("hidden");
+    adminView.classList.add("hidden");
 }
 
-// REJESTRACJA
+// --- REJESTRACJA ---
 document.getElementById("sendCodeBtn").onclick = () => {
     let email = document.getElementById("regEmail").value;
     let pass = document.getElementById("regPassword").value;
@@ -60,25 +66,35 @@ document.getElementById("verifyCodeBtn").onclick = () => {
     if (users[email] && users[email].code == code) {
         users[email].verified = true;
         localStorage.setItem("users", JSON.stringify(users));
-        showLogin();
+
+        // Admin check
+        if(email === "lilwriterfae@gmail.com"){
+            showAdminPanel();
+        } else {
+            showLogin();
+        }
     } else {
         document.getElementById("regMsg").innerText = "Niepoprawny kod!";
     }
 };
 
-// LOGOWANIE
+// --- LOGOWANIE ---
 document.getElementById("loginBtn").onclick = () => {
     let email = document.getElementById("loginEmail").value;
     let pass = document.getElementById("loginPassword").value;
 
     if (users[email] && users[email].verified && users[email].password === pass) {
-        showAccount(email);
+        if (email === "lilwriterfae@gmail.com") {
+            showAdminPanel();
+        } else {
+            showAccount(email);
+        }
     } else {
         document.getElementById("loginMsg").innerText = "Błędny email/hasło!";
     }
 };
 
-// RESET HASŁA
+// --- RESET HASŁA ---
 document.getElementById("resetSendBtn").onclick = () => {
     let email = document.getElementById("resetEmail").value;
 
@@ -114,7 +130,7 @@ document.getElementById("resetConfirmBtn").onclick = () => {
     }
 };
 
-// WYLOGOWANIE
+// --- WYLOGOWANIE ---
 document.getElementById("logoutBtn").onclick = () => {
     showLogin();
 };
