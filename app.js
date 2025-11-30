@@ -1,10 +1,8 @@
-// ----- TU WKLEIMY PÓŹNIEJ TWÓJ PRAWIDŁOWY FIREBASE CONFIG -----
-// na razie placeholder żeby się nie bugowało
-// Firebase CDN
+// --- Firebase CDN ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-// Twój config Firebase
+// --- TU WKLEJ SWÓJ FIREBASE CONFIG ---
 const firebaseConfig = {// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -30,20 +28,12 @@ const app = initializeApp(firebaseConfig);}
   appId: "1:1234567890:web:abcdef123456"
 };
 
-// Initialize Firebase
+// --- Initialize Firebase ---
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-console.log("RP Life działa 🔮");
-
-document.getElementById("loginBtn").addEventListener("click", () => {
-    alert("Logowanie email będzie dostępne po podpięciu Firebase ✨");
-});
-
-document.getElementById("googleBtn").addEventListener("click", () => {
-    alert("Logowanie Google aktywujemy za chwilę ✨");
-});
+// --- Obsługa przycisków ---
 document.getElementById("googleBtn").addEventListener("click", () => {
     signInWithPopup(auth, provider)
     .then((result) => {
@@ -58,6 +48,7 @@ document.getElementById("googleBtn").addEventListener("click", () => {
         alert("Coś poszło nie tak przy logowaniu Google ❌");
     });
 });
+
 document.getElementById("logoutBtn").addEventListener("click", () => {
     signOut(auth).then(() => {
         alert("Wylogowano 🌙");
@@ -66,3 +57,4 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
         document.getElementById("logoutBtn").classList.add("hidden");
     });
 });
+
